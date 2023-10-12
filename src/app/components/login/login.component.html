@@ -1,19 +1,26 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" formControlName="username">
-    </div>
-    <div *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched" class="form-error-message">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto p-4 space-y-6">
+    <div class="space-y-2">
+      <label for="username" class="block text-gray-700">Username</label>
+      <input type="text" id="username" name="username" formControlName="username"
+             class="block w-full border p-2 rounded focus:outline-none focus:border-blue-500">
+      <div *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched"
+           class="text-red-600">
         <div *ngIf="loginForm.get('username')?.hasError('required')">This field is required.</div>
+      </div>
     </div>
-
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="text" id="password" name="password" formControlName="password">
-    </div>
-    <div *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" class="form-error-message">
+  
+    <div class="space-y-2">
+      <label for="password" class="block text-gray-700">Password</label>
+      <input type="password" id="password" name="password" formControlName="password"
+             class="block w-full border p-2 rounded focus:outline-none focus:border-blue-500">
+      <div *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched"
+           class="text-red-600">
         <div *ngIf="loginForm.get('password')?.hasError('required')">This field is required.</div>
+      </div>
     </div>
-
-    <button type="submit" [disabled]="!loginForm.valid">Submit</button>
-</form>
+  
+    <button type="submit" [disabled]="!loginForm.valid"
+            class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none"
+    >Submit</button>
+  </form>
+  
