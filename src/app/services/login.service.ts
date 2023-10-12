@@ -12,9 +12,9 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public loginRegister(value: Partial<{ username: string | null; password: string | null; }>): Observable<User> {
+  public loginRegister(value: Partial<{ username: string | null; password: string | null; }>): Observable<any> {
     console.log(value.username, value.password);
-
-    return this.httpClient.post<User>(`${this.apiBaseUrl}/user`, value);
+    let option: any;
+    return this.httpClient.post<any>(`${this.apiBaseUrl}/auth/generateToken`, value, {...option, responseType: 'text'} );
   }
 }
