@@ -2,13 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.main-container {
+  min-height: 100%;
+}
+
+table {
+  text-align: center!important;
+}
+
 /* Form */
 input {
-    padding: 5px;
-  }
-  
-  /* form validation style */
-  .form-error-message {
-    color: red;
-    font-weight: bold;
-  }
+  padding: 5px;
+}
+
+/* form validation style */
+.form-error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.default-button {
+  color: white;
+  background-color: rgb(37, 99, 235);
+}
+
+/* Disabled (error) button style */
+.error-button {
+  color: #888;
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-button:hover {
+  background-color: #ccc !important;
+}

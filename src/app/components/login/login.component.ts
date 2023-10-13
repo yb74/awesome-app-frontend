@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services//login/login.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
@@ -21,7 +21,11 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    ) {}
+  ) {}
+
+    shouldShowErrorStyle(): boolean {
+      return this.loginForm.invalid;
+    }
 
   onSubmit() {
     if (this.loginForm.valid) {
@@ -33,7 +37,12 @@ export class LoginComponent {
           })
         )
         .subscribe((response: any) => {
+
           console.log(response);
+
+          localStorage.setItem("jwt", response);
+
+
           this.getDecodedAccessToken(response)
           if (!response.error) {
             this.router.navigate(['/home']);
@@ -45,8 +54,12 @@ export class LoginComponent {
   getDecodedAccessToken(token: string): any {
     try {
       const tokenInfo: any = jwt_decode(token)
-      const expireDate: any = tokenInfo.exp; // get token expiration dateTime
-      console.log("tokenInfo = %o and expireDate = %o", tokenInfo, expireDate)
+      const tokenObj = {
+        username: tokenInfo.sub,
+        creationDate: tokenInfo.iat,
+        expireDate: tokenInfo.exp
+      }
+      console.log("tokenInfo = %o and expireDate = %o", tokenInfo, tokenObj)
       return jwt_decode(token);
     } catch(Error) {
       return null;
