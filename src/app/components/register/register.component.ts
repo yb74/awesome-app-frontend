@@ -14,7 +14,6 @@ export class RegisterComponent {
   registerForm = this.formBuilder.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    roles: ['', Validators.required],
     password: ['', Validators.required],
     repeatPassword: ['', [Validators.required, this.matchValidator('password')]],
   });

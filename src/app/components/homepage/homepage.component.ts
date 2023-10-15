@@ -21,12 +21,12 @@ export class HomepageComponent implements OnInit {
 
   getUserProfile(token: any) {
     this.loginService.getUserProfile(token)
-        .pipe(
-          catchError((error: HttpErrorResponse) => {
-            console.log(error.message);
-            return throwError(() => error);
-          })
-        )
+        // .pipe(
+        //   catchError((error: HttpErrorResponse) => {
+        //     console.log(error.message);
+        //     return throwError(() => error);
+        //   })
+        // )
         .subscribe((response: any) => {
 
           console.log(response);

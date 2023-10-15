@@ -12,7 +12,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public loginRegister(value: Partial<{ username: string | null; password: string | null; }>): Observable<any> {
+  loginRegister(value: Partial<{ username: string | null; password: string | null; }>): Observable<any> {
     console.log(value.username, value.password);
     let option: any;
     return this.httpClient.post<any>(`${this.apiBaseUrl}/auth/generateToken`, value, {...option, responseType: 'text'} );
@@ -21,7 +21,13 @@ export class LoginService {
   getUserProfile(token: string) : Observable<any> {
     // Create headers with the Authorization header containing the token
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      // 'Content-Type': 'application/json',
+      // 'Access-Control-Allow-Origin': ' http://localhost:4200',
+      // 'Access-Control-Allow-Credentials': 'true',
+      // 'Access-Control-Allow-Methods': '*',
+      // 'Access-Control-Max-Age': ' 3600',
+      // 'Access-Control-Allow-Headers': '*'
     });
 
     // Include the headers in the HTTP request

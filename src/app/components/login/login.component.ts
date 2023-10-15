@@ -23,9 +23,9 @@ export class LoginComponent {
     private router: Router,
   ) {}
 
-    shouldShowErrorStyle(): boolean {
-      return this.loginForm.invalid;
-    }
+  shouldShowErrorStyle(): boolean {
+    return this.loginForm.invalid;
+  }
 
   onSubmit() {
     if (this.loginForm.valid) {
