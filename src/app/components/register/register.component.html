@@ -45,6 +45,18 @@
         </div>
       </div>      
 
+      <!-- <div class="space-y-2">
+        <label for="roles" class="block text-gray-300">Select a role:</label>
+        <select id="roles" formControlName="roles" class="block w-full border p-2 rounded bg-gray-700 focus:outline-none focus:border-blue-500 text-white">
+          <option value="" disabled>Select a role</option>
+          <option value="ROLE_USER">ROLE_USER</option>
+          <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+        </select>
+        <div *ngIf="registerForm.get('roles')?.hasError('required')" class="text-red-600">
+          Role selection is required.
+        </div>
+    </div> -->
+
     <button type="submit" [ngClass]="{
       'default-button': !shouldShowErrorStyle(),
       'error-button': shouldShowErrorStyle()

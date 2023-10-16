@@ -16,13 +16,16 @@ export class RegisterComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     repeatPassword: ['', [Validators.required, this.matchValidator('password')]],
+    // roles: ['', Validators.required]
   });
+
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private registerService: RegisterService
-    ) {}
+    ) {
+    }
 
     matchValidator(controlName: string) {
       return (control: any) => {

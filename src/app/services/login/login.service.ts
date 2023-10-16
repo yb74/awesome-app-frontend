@@ -31,6 +31,6 @@ export class LoginService {
     };
 
     // Make the request to the back-end
-    return this.httpClient.get<any>(`${this.apiBaseUrl}/auth/user/userProfile`, options);
+    return this.httpClient.get<User>(`${this.apiBaseUrl}/auth/userdetails`, options);
   }
 }
