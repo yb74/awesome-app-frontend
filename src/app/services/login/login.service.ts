@@ -12,13 +12,20 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
+  /*
+    function that send username and password to backend, backend check if data match user in db and generate a token
+  */
   loginRegister(value: Partial<{ username: string | null; password: string | null; }>): Observable<any> {
     console.log(value.username, value.password);
     let option: any;
-    return this.httpClient.post<any>(`${this.apiBaseUrl}/auth/generateToken`, value, {...option, responseType: 'text'} );
+    return this.httpClient.post<string>(`${this.apiBaseUrl}/auth/generateToken`, value, {...option, responseType: 'text'} );
   }
 
-  getUserProfile(token: string) : Observable<any> {
+  /*
+    function that send details of the logged in user.
+    it takes the token in request header and the backend decode it to send data of the user connected
+  */
+  getUserProfile(token: string) : Observable<User> {
     // Create headers with the Authorization header containing the token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
