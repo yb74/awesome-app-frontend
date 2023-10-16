@@ -22,12 +22,7 @@ export class LoginService {
     // Create headers with the Authorization header containing the token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      // 'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': ' http://localhost:4200',
-      // 'Access-Control-Allow-Credentials': 'true',
-      // 'Access-Control-Allow-Methods': '*',
-      // 'Access-Control-Max-Age': ' 3600',
-      // 'Access-Control-Allow-Headers': '*'
+      'Content-Type': 'application/json'
     });
 
     // Include the headers in the HTTP request
