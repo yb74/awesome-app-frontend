@@ -71,7 +71,7 @@ export class LoginComponent {
               console.log("hide toast")
               this.toastService.updateToastVisibility(false);
             }, 5000);
-          }, 1000 * 10)
+          }, 1000 * 60 * 30)
 
           if (!response.error) {
             this.router.navigate(['/home']);
