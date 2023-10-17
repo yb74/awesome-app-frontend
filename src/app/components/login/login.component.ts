@@ -58,7 +58,7 @@ export class LoginComponent {
   
           localStorage.setItem("jwt", response);
           // Redirect to login page and display toast when token expires
-          setInterval(() => {
+          setTimeout(() => {
             console.log("token has expired")
             this.router.navigate(['/login']);
           }, 1000 * 10)
