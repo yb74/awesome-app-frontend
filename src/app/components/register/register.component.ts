@@ -74,9 +74,7 @@ export class RegisterComponent {
               setTimeout(() => {
                 console.log("token has expired");
                 this.router.navigate(['/login']);
-              }, 10000);
-    
-              setTimeout(() => {
+
                 this.toastService.updateToastMessage('Token has expired.');
                 this.toastService.updateToastVisibility(true);
     

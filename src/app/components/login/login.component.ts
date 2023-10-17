@@ -61,9 +61,7 @@ export class LoginComponent {
           setTimeout(() => {
             console.log("token has expired")
             this.router.navigate(['/login']);
-          }, 1000 * 10)
 
-          setTimeout(() => {
             this.toastService.updateToastMessage('Token has expired.');
             this.toastService.updateToastVisibility(true);
 
