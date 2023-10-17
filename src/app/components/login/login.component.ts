@@ -41,6 +41,7 @@ export class LoginComponent {
             if (error.status === 0) {
               this.toastService.updateToastMessage('Network error. Please check your connection.');
             } else {
+              console.log(error)
               this.toastService.updateToastMessage(error.error);
             }
   
@@ -56,16 +57,21 @@ export class LoginComponent {
           console.log(response);
   
           localStorage.setItem("jwt", response);
-          // display toast and redirect to login page when token expires
+          // Redirect to login page and display toast when token expires
           setInterval(() => {
             console.log("token has expired")
+            this.router.navigate(['/login']);
+          }, 1000 * 10)
+
+          setTimeout(() => {
             this.toastService.updateToastMessage('Token has expired.');
             this.toastService.updateToastVisibility(true);
+
             setTimeout(() => {
+              console.log("hide toast")
               this.toastService.updateToastVisibility(false);
-              this.router.navigate(['/login']);
             }, 5000);
-          }, 1000 * 20)
+          }, 1000 * 10)
 
           if (!response.error) {
             this.router.navigate(['/home']);

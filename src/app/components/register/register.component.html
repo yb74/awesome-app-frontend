@@ -1,10 +1,10 @@
 <div class="flex w-screen flex-wrap text-slate-800">
   <div class="relative hidden h-screen select-none flex-col justify-center bg-blue-600 text-center md:flex md:w-1/2">
     <div class="mx-auto py-16 px-8 text-white xl:w-[40rem]">
-      <span class="rounded-full bg-white px-3 py-1 font-medium text-blue-600">New Feature</span>
-      <p class="my-6 text-3xl font-semibold leading-10">Create animations with <span class="mx-auto block w-56 whitespace-nowrap rounded-lg bg-orange-400 py-2 text-white">drag and drop</span></p>
+      <span class="rounded-full bg-white px-3 py-1 font-medium text-blue-600">Lorem Ipsum</span>
+      <p class="my-6 text-3xl font-semibold leading-10">ecessitatibus nostrum repellendus <span class="mx-auto block w-56 whitespace-nowrap rounded-lg bg-orange-400 py-2 text-white">consectetur</span></p>
       <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt necessitatibus nostrum repellendus ab totam.</p>
-      <a href="#" class="font-semibold tracking-wide text-white underline underline-offset-4">Learn More</a>
+      <a href="#" class="font-semibold tracking-wide text-white underline underline-offset-4">Muspi Merol</a>
     </div>
     <!-- <img class="mx-auto w-11/12 max-w-lg rounded-lg object-cover" src="/images/SoOmmtD2P6rjV76JvJTc6.png" /> -->
   </div>
@@ -21,7 +21,7 @@
   
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col items-stretch pt-3 md:pt-8">
         <div class="flex flex-col pt-4">
-          <div class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+          <div class="flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
             <input type="text" id="name" name="name" formControlName="name" class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Name" />
           </div>
           <div *ngIf="!registerForm.get('name')?.valid && registerForm.get('name')?.touched"class="text-red-600">
@@ -32,7 +32,7 @@
         </div>
 
         <div class="flex flex-col pt-4">
-          <div class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+          <div class="flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
             <input type="email" id="email" name="email" formControlName="email" class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" />
           </div>
           <div *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched"class="text-red-600">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="flex flex-col pt-4">
-          <div class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+          <div class="flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
             <input type="password" id="password" name="password" formControlName="password" class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" />
           </div>
           <div *ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched"class="text-red-600">
@@ -57,7 +57,7 @@
         </div>
 
         <div class="flex flex-col pt-4">
-          <div class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+          <div class="flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
             <input type="password" id="repeatPassword" name="repeatPassword" formControlName="repeatPassword" class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Repeat Password" />
           </div>
           <div *ngIf="!registerForm.get('repeatPassword')?.valid && registerForm.get('repeatPassword')?.touched"class="text-red-600">

@@ -18,7 +18,7 @@ export class HomepageComponent implements OnInit {
   constructor(
     private loginService: LoginService
   ) {
-    this.userProfile = {name: "", email: "", roles: ""}
+    this.userProfile = {name: "", email: "", roles: "", password: ""}
   }
 
   ngOnInit(): void {

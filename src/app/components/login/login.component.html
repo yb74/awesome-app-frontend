@@ -16,7 +16,7 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col items-stretch pt-3 md:pt-8">
         <div class="flex flex-col pt-4">
-          <div class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+          <div class="flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
             <input type="text" id="username" name="username" formControlName="username" class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Username" />
           </div>
           <div *ngIf="!loginForm.get('username')?.valid && loginForm.get('username')?.touched" class="text-red-600">
@@ -25,7 +25,7 @@
         </div>
 
         <div class="mb-4 flex flex-col pt-4">
-          <div class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
+          <div class="flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
             <input type="password" id="password" name="password" formControlName="password" class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" />
           </div>
           <div *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched" class="text-red-600">
@@ -50,13 +50,12 @@
       </div>
     </div>
   </div>
-  <div class="relative hidden h-screen select-none bg-blue-600 bg-gradient-to-br md:block md:w-1/2">
+  <div class="hidden h-screen select-none bg-blue-600 bg-gradient-to-br md:block md:w-1/2">
     <div class="py-16 px-8 text-white xl:w-[40rem]">
-      <span class="rounded-full bg-white px-3 py-1 font-medium text-blue-600">New Feature</span>
-      <p class="my-6 text-3xl font-semibold leading-10">Create animations with <span class="abg-white whitespace-nowrap py-2 text-cyan-300">drag and drop</span>.</p>
+      <span class="rounded-full bg-white px-3 py-1 font-medium text-blue-600">Lorem Ipsum</span>
+      <p class="my-6 text-3xl font-semibold leading-10">amet consectetur, adipisicing elit. Incidunt  <span class="abg-white whitespace-nowrap py-2 text-cyan-300">necessitatibus nostrum </span>.</p>
       <p class="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt necessitatibus nostrum repellendus ab totam.</p>
-      <a href="#" class="font-semibold tracking-wide text-white underline underline-offset-4">Learn More</a>
+      <a href="#" class="font-semibold tracking-wide text-white underline underline-offset-4">lretum sitdolor</a>
     </div>
-    <img class="ml-8 w-11/12 max-w-lg rounded-lg object-cover" src="/images/aaFKzowNcgxqSdxMw11na.png" />
   </div>
 </div>

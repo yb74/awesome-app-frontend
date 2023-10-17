@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { User } from 'src/app/models/user';
 import { RegisterService } from 'src/app/services/register/register.service';
 
 @Component({
@@ -11,12 +12,12 @@ import { RegisterService } from 'src/app/services/register/register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
   registerForm = this.formBuilder.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    repeatPassword: ['', [Validators.required, this.matchValidator('password')]],
-    // roles: ['', Validators.required]
+    repeatPassword: ['', [Validators.required, this.matchValidator('password')]]
   });
 
 
@@ -24,11 +25,10 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private registerService: RegisterService
-    ) {
-    }
+    ) {}
 
     matchValidator(controlName: string) {
-      return (control: any) => {
+      return (control: AbstractControl) => {
         if (this.registerForm && control.value === this.registerForm.get(controlName)?.value) {
           return null;
         }
