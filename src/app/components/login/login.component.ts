@@ -35,30 +35,38 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.loginService.loginRegister(this.loginForm.value)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.log(error)
-          if (error.status === 0) {
-            this.toastService.updateToastMessage(
-              'Network error. Please check your connection.'
-            );
-          } else {
-            this.toastService.updateToastMessage(error.error);
-          }
-
-          this.toastService.updateToastVisibility(true);
-          setTimeout(() => {
-            this.toastService.updateToastVisibility(false);
-          }, 5000);
-
-          return throwError(() => error);
-        })
-      )
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            console.log(error);
+            if (error.status === 0) {
+              this.toastService.updateToastMessage('Network error. Please check your connection.');
+            } else {
+              this.toastService.updateToastMessage(error.error);
+            }
+  
+            this.toastService.updateToastVisibility(true);
+            setTimeout(() => {
+              this.toastService.updateToastVisibility(false);
+            }, 5000);
+  
+            return throwError(() => error);
+          })
+        )
         .subscribe((response: any) => {
-
           console.log(response);
-
+  
           localStorage.setItem("jwt", response);
+          // display toast and redirect to login page when token expires
+          setInterval(() => {
+            console.log("token has expired")
+            this.toastService.updateToastMessage('Token has expired.');
+            this.toastService.updateToastVisibility(true);
+            setTimeout(() => {
+              this.toastService.updateToastVisibility(false);
+              this.router.navigate(['/login']);
+            }, 5000);
+          }, 1000 * 20)
+
           if (!response.error) {
             this.router.navigate(['/home']);
           }
