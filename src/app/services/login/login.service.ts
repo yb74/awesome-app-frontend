@@ -38,6 +38,6 @@ export class LoginService {
     };
 
     // Make the request to the back-end
-    return this.httpClient.get<User>(`${this.apiBaseUrl}/auth/userdetails`, options);
+    return this.httpClient.get<User>(`${this.apiBaseUrl}/auth/user/userdetails`, options);
   }
 }
