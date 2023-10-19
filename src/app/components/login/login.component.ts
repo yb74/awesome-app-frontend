@@ -40,6 +40,9 @@ export class LoginComponent {
             console.log(error);
             if (error.status === 0) {
               this.toastService.updateToastMessage('Network error. Please check your connection.');
+            } else if (error.status === 403) {
+              console.log(error)
+              this.toastService.updateToastMessage("Forbidden");
             } else {
               console.log(error)
               this.toastService.updateToastMessage(error.error);
@@ -57,8 +60,39 @@ export class LoginComponent {
           console.log(response);
   
           localStorage.setItem("jwt", response);
+
           // Redirect to login page and display toast when token expires
           setTimeout(() => {
+            window.addEventListener('mousemove', () => {
+              this.loginService.refreshToken(JSON.parse(localStorage.getItem("jwt")!).token)
+            .pipe(
+              catchError((error: HttpErrorResponse) => {
+                console.log(error);
+                if (error.status === 0) {
+                  this.toastService.updateToastMessage('Network error. Please check your connection.');
+                } else if (error.status === 403) {
+                  console.log(error)
+                  this.toastService.updateToastMessage("Forbidden");
+                } else {
+                  console.log(error)
+                  this.toastService.updateToastMessage(error.error);
+                }
+      
+                this.toastService.updateToastVisibility(true);
+                setTimeout(() => {
+                  this.toastService.updateToastVisibility(false);
+                }, 5000);
+      
+                return throwError(() => error);
+              })
+            )
+            .subscribe((response: any) => {
+              console.log(response);
+
+              // put the new refresh token in storage if mouse is moving
+              localStorage.setItem("jwt", response);
+            })
+
             console.log("token has expired")
             this.router.navigate(['/login']);
 
@@ -69,7 +103,8 @@ export class LoginComponent {
               console.log("hide toast")
               this.toastService.updateToastVisibility(false);
             }, 5000);
-          }, 1000 * 60 * 30)
+            })
+          }, 1000 * 40)
 
           if (!response.error) {
             this.router.navigate(['/home']);

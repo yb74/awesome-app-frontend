@@ -22,7 +22,10 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserProfile(this.token)
+    const accessTokenJSON = JSON.parse(this.token).accessToken
+
+    this.getUserProfile(accessTokenJSON.toString())
+    console.log(accessTokenJSON)
   }
 
   getUserProfile(token: string) {

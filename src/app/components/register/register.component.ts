@@ -72,6 +72,35 @@ export class RegisterComponent {
     
               // Redirect to the login page and display a toast when the token expires
               setTimeout(() => {
+                console.log(JSON.parse(localStorage.getItem("jwt")!).token)
+                // const expiredTokenId = JSON.parse(this.token).token
+                this.loginService.refreshToken(JSON.parse(localStorage.getItem("jwt")!).token)
+                .pipe(
+                  catchError((error: HttpErrorResponse) => {
+                    console.log(error);
+                    if (error.status === 0) {
+                      this.toastService.updateToastMessage('Network error. Please check your connection.');
+                    } else if (error.status === 403) {
+                      console.log(error)
+                      this.toastService.updateToastMessage("Forbidden");
+                    } else {
+                      console.log(error)
+                      this.toastService.updateToastMessage(error.error);
+                    }
+          
+                    this.toastService.updateToastVisibility(true);
+                    setTimeout(() => {
+                      this.toastService.updateToastVisibility(false);
+                    }, 5000);
+          
+                    return throwError(() => error);
+                  })
+                )
+                .subscribe((response: any) => {
+                  console.log(response);
+                })
+
+
                 console.log("token has expired");
                 this.router.navigate(['/login']);
 
@@ -81,7 +110,7 @@ export class RegisterComponent {
                 setTimeout(() => {
                   this.toastService.updateToastVisibility(false);
                 }, 5000);
-              }, 1000 * 60 * 30);
+              }, 1000 * 40);
     
               if (!loginResponse.error) {
                 this.router.navigate(['/home']);

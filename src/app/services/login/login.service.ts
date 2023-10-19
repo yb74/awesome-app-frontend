@@ -40,4 +40,11 @@ export class LoginService {
     // Make the request to the back-end
     return this.httpClient.get<User>(`${this.apiBaseUrl}/auth/user/userdetails`, options);
   }
+
+  refreshToken(expiredTokenId: string) : Observable<string> {
+    const body = {
+      token: expiredTokenId
+    }
+    return this.httpClient.post<any>(`${this.apiBaseUrl}/auth/refreshToken`, body);
+  }
 }
