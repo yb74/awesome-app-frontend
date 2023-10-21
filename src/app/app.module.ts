@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ToastComponent } from './shared/UI/toast/toast.component';
+import { AuthGuard } from './services/guards/AuthGuard';
+import { LoginGuard } from './services/guards/LoginGuard';
+import { TokenTimerComponent } from './shared/UI/token-timer/token-timer/token-timer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import { ToastComponent } from './shared/UI/toast/toast.component';
     LoginComponent,
     HomepageComponent,
     RegisterComponent,
-    ToastComponent
+    ToastComponent,
+    TokenTimerComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,7 @@ import { ToastComponent } from './shared/UI/toast/toast.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

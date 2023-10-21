@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenTimerService } from './services/token-timer/token-timer.service'; // Adjust the import path as needed
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'awesome-app';
+
+  constructor(public tokenTimerService: TokenTimerService) {}
+
+  toastMessage: string = ''; // Initialize with an empty string
+  showToast: boolean = false; // Initialize as false
 }
