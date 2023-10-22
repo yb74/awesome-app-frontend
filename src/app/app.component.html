@@ -1,5 +1,8 @@
 <div class="main-container">
-    <app-token-timer [message]="(tokenTimerService.toastMessage$ | async) || ''" [show]="(tokenTimerService.showToast$ | async) || false"></app-token-timer>
-
+    <app-token-timer
+    [message]="(tokenTimerService.toastMessage$ | async) || ''"
+    [show]="(tokenTimerService.showToast$ | async) || false"
+    (refreshClicked)="handleTokenRefresh()"
+    ></app-token-timer>
     <router-outlet></router-outlet>
 </div>

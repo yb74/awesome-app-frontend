@@ -19,7 +19,7 @@ export class RegisterComponent {
   registerForm = this.formBuilder.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?_\-])[A-Za-z\d@$!%*?_\-]{6,}$/)]],
     repeatPassword: ['', [Validators.required, this.matchValidator('password')]]
   });
 
@@ -69,48 +69,6 @@ export class RegisterComponent {
             if (loginResponse) {
               // Store the token in local storage
               localStorage.setItem("jwt", loginResponse);
-    
-              // Redirect to the login page and display a toast when the token expires
-              // setTimeout(() => {
-              //   console.log(JSON.parse(localStorage.getItem("jwt")!).token)
-              //   // const expiredTokenId = JSON.parse(this.token).token
-              //   this.loginService.refreshToken(JSON.parse(localStorage.getItem("jwt")!).token)
-              //   .pipe(
-              //     catchError((error: HttpErrorResponse) => {
-              //       console.log(error);
-              //       if (error.status === 0) {
-              //         this.toastService.updateToastMessage('Network error. Please check your connection.');
-              //       } else if (error.status === 403) {
-              //         console.log(error)
-              //         this.toastService.updateToastMessage("Forbidden");
-              //       } else {
-              //         console.log(error)
-              //         this.toastService.updateToastMessage(error.error);
-              //       }
-          
-              //       this.toastService.updateToastVisibility(true);
-              //       setTimeout(() => {
-              //         this.toastService.updateToastVisibility(false);
-              //       }, 5000);
-          
-              //       return throwError(() => error);
-              //     })
-              //   )
-              //   .subscribe((response: any) => {
-              //     console.log(response);
-              //   })
-
-
-              //   console.log("token has expired");
-              //   this.router.navigate(['/login']);
-
-              //   this.toastService.updateToastMessage('Token has expired.');
-              //   this.toastService.updateToastVisibility(true);
-    
-              //   setTimeout(() => {
-              //     this.toastService.updateToastVisibility(false);
-              //   }, 5000);
-              // }, 1000 * 40);
     
               if (!loginResponse.error) {
                 this.router.navigate(['/home']);

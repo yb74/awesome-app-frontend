@@ -33,6 +33,13 @@ export class HomepageComponent implements OnInit {
 
     if (remainingTime <= 0) {
       this.tokenTimerService.show('Token has expired');
+
+      // Set a timeout to hide the token timer component after 5 seconds
+      // Hiding it after 5 secs doesn't work
+      setTimeout(() => {
+        console.log("hide token")
+        this.tokenTimerService.hide();
+      }, 5000);
     } else {
       this.tokenTimerService.show(`Token will expire in ${countdown}`);
     }
@@ -43,79 +50,79 @@ export class HomepageComponent implements OnInit {
     this.getUserProfile(accessTokenJSON.toString());
   }
 
-  @HostListener('document:click', ['$event'])
-  onMouseclick(e: MouseEvent) {
-    console.log("clicked refresh");
+  // @HostListener('document:click', ['$event'])
+  // onMouseclick(e: MouseEvent) {
+  //   console.log("clicked refresh");
 
-    // Your code to refresh the token
-    const jwtItem = localStorage.getItem("jwt");
+  //   // Your code to refresh the token
+  //   const jwtItem = localStorage.getItem("jwt");
 
-    if (!jwtItem) {
-      // Handle the case where the item is not found in localStorage.
-      console.log("JWT token not found in localStorage.");
-      return;
-    }
+  //   if (!jwtItem) {
+  //     // Handle the case where the item is not found in localStorage.
+  //     console.log("JWT token not found in localStorage.");
+  //     return;
+  //   }
 
-    try {
-      const jwt = JSON.parse(jwtItem);
+  //   try {
+  //     const jwt = JSON.parse(jwtItem);
 
-      this.loginService.refreshToken(jwt.token)
-        .pipe(
-          catchError((error) => {
-            console.log(error);
+  //     this.loginService.refreshToken(jwt.token)
+  //       .pipe(
+  //         catchError((error) => {
+  //           console.log(error);
 
-            if (error.status === 0) {
-              this.toastService.updateToastMessage('Network error. Please check your connection.');
-            } else if (error.status === 403) {
-              console.log(error);
-              this.toastService.updateToastMessage("Forbidden");
-            } else {
-              console.log(error);
-              this.toastService.updateToastMessage(error.error);
-            }
+  //           if (error.status === 0) {
+  //             this.toastService.updateToastMessage('Network error. Please check your connection.');
+  //           } else if (error.status === 403) {
+  //             console.log(error);
+  //             this.toastService.updateToastMessage("Forbidden");
+  //           } else {
+  //             console.log(error);
+  //             this.toastService.updateToastMessage(error.error);
+  //           }
 
-            this.toastService.updateToastVisibility(true);
-            setTimeout(() => {
-              this.toastService.updateToastVisibility(false);
-            }, 5000);
+  //           this.toastService.updateToastVisibility(true);
+  //           setTimeout(() => {
+  //             this.toastService.updateToastVisibility(false);
+  //           }, 5000);
 
-            return throwError(() => error);
-          })
-        )
-        .subscribe((response: any) => {
-          if (!response.error) {
-            console.log(response);
-            console.log("token refreshed");
+  //           return throwError(() => error);
+  //         })
+  //       )
+  //       .subscribe((response: any) => {
+  //         if (!response.error) {
+  //           console.log(response);
+  //           console.log("token refreshed");
 
-            // Update both the access token and refresh token in storage with the new values
-            const updatedToken = {
-              accessToken: response.accessToken,
-              token: response.token // Update the refresh token as well
-            };
+  //           // Update both the access token and refresh token in storage with the new values
+  //           const updatedToken = {
+  //             accessToken: response.accessToken,
+  //             token: response.token // Update the refresh token as well
+  //           };
 
-            this.tokenService.setAccessToken(JSON.stringify(updatedToken));
+  //           this.tokenService.setAccessToken(JSON.stringify(updatedToken));
 
-            // Calculate the remaining time until token expiration
-            const remainingTime = this.tokenService.calculateTokenExpirationTime();
-            const countdown = this.tokenService.getTokenExpirationCountdown$();
+  //           // Calculate the remaining time until token expiration
+  //           const remainingTime = this.tokenService.calculateTokenExpirationTime();
+  //           const countdown = this.tokenService.getTokenExpirationCountdown$();
 
-            if (remainingTime <= 0) {
-              this.tokenTimerService.show('Token has expired');
-              console.log('Token has expired');
-              // this.router.navigate(['/login']);
-              // console.log("redirected to /login")
-            } else {
-              this.tokenTimerService.show(`Token will expire in ${countdown}`);
-              console.log(`Token will expire in ${countdown}`);
-              // this.router.navigate(['/home']);
-            }
-          }
-        });
-    } catch (error) {
-      // Handle the case where the stored JWT token is not in the expected JSON format.
-      console.log("Invalid JWT token format in localStorage.");
-    }
-  }
+  //           if (remainingTime <= 0) {
+  //             this.tokenTimerService.show('Token has expired');
+  //             console.log('Token has expired');
+  //             // this.router.navigate(['/login']);
+  //             // console.log("redirected to /login")
+  //           } else {
+  //             this.tokenTimerService.show(`Token will expire in ${countdown}`);
+  //             console.log(`Token will expire in ${countdown}`);
+  //             // this.router.navigate(['/home']);
+  //           }
+  //         }
+  //       });
+  //   } catch (error) {
+  //     // Handle the case where the stored JWT token is not in the expected JSON format.
+  //     console.log("Invalid JWT token format in localStorage.");
+  //   }
+  // }
 
   getUserProfile(token: string) {
     this.loginService.getUserProfile(token)
