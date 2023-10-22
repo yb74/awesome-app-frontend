@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenExpirationService } from '../token-expiration-service/token-expiration.service';
+import { TokenExpirationService } from '../token-expiration/token-expiration.service';
 import { TokenService } from '../token/token.service';
 
 @Injectable({

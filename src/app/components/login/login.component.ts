@@ -26,7 +26,7 @@ export class LoginComponent {
     private loginService: LoginService,
     private router: Router,
     private toastService: ToastService,
-    private tokenService: TokenService, // Inject TokenService
+    private tokenService: TokenService,
     private tokenTimerService: TokenTimerService
   ) {
     this.isToastVisible$ = this.toastService.isToastVisible$;
