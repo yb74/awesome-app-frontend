@@ -14,6 +14,11 @@ import { AuthGuard } from './services/guards/AuthGuard';
 import { LoginGuard } from './services/guards/LoginGuard';
 import { TokenTimerComponent } from './shared/UI/token-timer/token-timer/token-timer.component';
 
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +32,10 @@ import { TokenTimerComponent } from './shared/UI/token-timer/token-timer/token-t
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [AuthGuard, LoginGuard],
   bootstrap: [AppComponent]

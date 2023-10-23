@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login/login.service';
 import { RegisterService } from 'src/app/services/register/register.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent {
   registerForm = this.formBuilder.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?_\-])[A-Za-z\d@$!%*?_\-]{6,}$/)]],
+    // password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?_\-])[A-Za-z\d@$!%*?_\-]{6,}$/)]],
+    password: ['', [Validators.required,  this.matchValidator('password')]],
     repeatPassword: ['', [Validators.required, this.matchValidator('password')]]
   });
 
@@ -29,7 +31,8 @@ export class RegisterComponent {
     private router: Router,
     private registerService: RegisterService,
     private loginService: LoginService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private tokenService: TokenService
     ) {
       this.isToastVisible$ = this.toastService.isToastVisible$;
     }
@@ -68,7 +71,7 @@ export class RegisterComponent {
           .subscribe((loginResponse: any) => {
             if (loginResponse) {
               // Store the token in local storage
-              localStorage.setItem("jwt", loginResponse);
+              this.tokenService.setAccessToken(loginResponse);
     
               if (!loginResponse.error) {
                 this.router.navigate(['/home']);

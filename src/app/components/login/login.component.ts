@@ -26,8 +26,7 @@ export class LoginComponent {
     private loginService: LoginService,
     private router: Router,
     private toastService: ToastService,
-    private tokenService: TokenService,
-    private tokenTimerService: TokenTimerService
+    private tokenService: TokenService
   ) {
     this.isToastVisible$ = this.toastService.isToastVisible$;
   }
@@ -66,21 +65,8 @@ export class LoginComponent {
           if (!response.error) {
             // Use the TokenService to set the access token
             this.tokenService.setAccessToken(response);
-  
-            // Calculate the remaining time until token expiration
-            const remainingTime = this.tokenService.calculateTokenExpirationTime();
-            const countdown = this.tokenService.getTokenExpirationCountdown$();
-  
-            if (remainingTime <= 0) {
-              this.tokenTimerService.show('Token has expired');
-              console.log('Token has expired');
-              // this.router.navigate(['/login']);
-              // console.log("redirected to /login")
-            } else {
-              this.tokenTimerService.show(`Token will expire in ${countdown}`);
-              console.log(`Token will expire in ${countdown}`);
-              this.router.navigate(['/home']);
-            }
+
+            this.router.navigate(['/home']);
           }
         });
     }
