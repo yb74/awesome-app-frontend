@@ -12,12 +12,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { ToastComponent } from './shared/UI/toast/toast.component';
 import { AuthGuard } from './services/guards/AuthGuard';
 import { LoginGuard } from './services/guards/LoginGuard';
-import { TokenTimerComponent } from './shared/UI/token-timer/token-timer/token-timer.component';
 
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { ToastrModule } from 'ngx-toastr';
     HomepageComponent,
     RegisterComponent,
     ToastComponent,
-    TokenTimerComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +32,9 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    // BrowserAnimationsModule, // required animations module
+    ToastNoAnimationModule.forRoot(),
+    // ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [AuthGuard, LoginGuard],
   bootstrap: [AppComponent]

@@ -70,7 +70,6 @@ export class RegisterComponent {
           )
           .subscribe((loginResponse: any) => {
             if (loginResponse) {
-              // Store the token in local storage
               this.tokenService.setAccessToken(loginResponse);
     
               if (!loginResponse.error) {

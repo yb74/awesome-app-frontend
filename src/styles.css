@@ -1,3 +1,6 @@
+@import "../../awesome-app-frontend/node_modules/ngx-toastr/toastr.css";
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

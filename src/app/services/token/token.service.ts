@@ -7,17 +7,14 @@ import { map, Observable, timer } from 'rxjs';
 export class TokenService {
   constructor() {}
 
-  // Set the access token in localStorage
   setAccessToken(token: string): void {
     localStorage.setItem('jwt', token);
   }
 
-  // Get the access token from localStorage
   getAccessToken(): string | null {
     return localStorage.getItem('jwt');
   }
 
-  // Clear the access token from localStorage
   clearAccessToken(): void {
     localStorage.removeItem('jwt');
   }
@@ -27,7 +24,7 @@ export class TokenService {
     const accessToken = this.getAccessToken();
     if (accessToken) {
       const payload = JSON.parse(atob(accessToken.split('.')[1]));
-      const expirationTime = payload.exp * 1000; // Convert to milliseconds
+      const expirationTime = payload.exp * 1000;
       const currentTime = Date.now();
       return Math.max(0, Math.floor((expirationTime - currentTime) / 1000)); // Remaining seconds
     }

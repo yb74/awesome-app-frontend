@@ -6,7 +6,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { TokenService } from 'src/app/services/token/token.service';
-import { TokenTimerService } from 'src/app/services/token-timer/token-timer.service';
 
 @Component({
   selector: 'app-login',
