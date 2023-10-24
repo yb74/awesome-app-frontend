@@ -6,6 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { TokenService } from 'src/app/services/token/token.service';
+import { environment } from 'src/environments/environment';
+import { AES } from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +38,14 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.loginService.loginRegister(this.loginForm.value)
+
+      const loginF = this.loginForm.value;
+
+      if (loginF.password) {
+        loginF.password = AES.encrypt(loginF.password, environment.key).toString();
+      }
+
+      this.loginService.loginRegister(loginF)
         .pipe(
           catchError((error: HttpErrorResponse) => {
             console.log(error);

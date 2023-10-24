@@ -60,6 +60,10 @@ export class RegisterComponent {
         
         // the use of partial in the service cause problem to encryption code so we use this const
         const registerF = this.registerForm.value;
+        
+        if (registerF.password) {
+          registerF.password = AES.encrypt(registerF.password, environment.key).toString() 
+        }
     
         this.registerService.register(registerF)
           .pipe(
@@ -69,10 +73,9 @@ export class RegisterComponent {
             }),
             switchMap((response: any) => {
               if (!response.error && registerF.password && registerF.name) {
-                const passwordEncrypted = AES.encrypt(registerF.password, environment.key).toString()
                 return this.loginService.loginRegister({ 
                   username: registerF.name, 
-                  password: passwordEncrypted,
+                  password: registerF.password,
                 });
               } else {
                 return throwError(() => new Error("User registration failed"));
