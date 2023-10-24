@@ -40,7 +40,7 @@ export class TokenService {
         }
         const minutes = Math.floor(remainingSeconds / 60);
         const seconds = remainingSeconds % 60;
-        return `${minutes}m ${seconds}s`;
+        return `Token will expire in ${minutes}m ${seconds}s`;
       })
     );
   }

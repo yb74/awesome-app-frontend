@@ -10,7 +10,7 @@ export class TokenExpirationService {
 
   constructor(private tokenService: TokenService) {
     // Check the token expiration periodically and emit an event when it expires
-    // Used bu Auth guard to redirect to /login when token expires
+    // Used by Auth guard to redirect to /login when token expires
     timer(0, 1000)
       .subscribe(() => {
         if (this.tokenService.isTokenExpired()) {

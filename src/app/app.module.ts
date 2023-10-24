@@ -13,11 +13,6 @@ import { ToastComponent } from './shared/UI/toast/toast.component';
 import { AuthGuard } from './services/guards/AuthGuard';
 import { LoginGuard } from './services/guards/LoginGuard';
 
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,10 +26,6 @@ import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toas
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule,
-    // BrowserAnimationsModule, // required animations module
-    ToastNoAnimationModule.forRoot(),
-    // ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [AuthGuard, LoginGuard],
   bootstrap: [AppComponent]

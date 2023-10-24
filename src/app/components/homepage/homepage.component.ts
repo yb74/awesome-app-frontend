@@ -1,10 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, Subscription, throwError } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login/login.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { TokenService } from 'src/app/services/token/token.service';
-import { ToasterMsgService } from 'src/app/services/toaster/toasterMsg.service';
 
 @Component({
   selector: 'app-homepage',
@@ -16,46 +15,32 @@ export class HomepageComponent implements OnInit {
   
   public token: string = localStorage.getItem("jwt")!;
   public remainingTime = this.tokenService.calculateTokenExpirationTime();
-  public countdown: Observable<string> = this.tokenService.getTokenExpirationCountdown$();
 
   public userProfile: User;
-  numClicks: number = 0
-  tokenCountdown: string = ''; // Variable to store the countdown value
+  public numClicks = 0;
+  public countdownMsg = "";
+  public showCountdownMsg = false;
 
   constructor(
     private loginService: LoginService,
     private toastService: ToastService,
-    private tokenService: TokenService,
-    private toastrMsg: ToasterMsgService
+    private tokenService: TokenService
   ) {
     this.userProfile = { name: "", email: "", roles: "", password: "" };
     this.isToastVisible$ = this.toastService.isToastVisible$;
-
-    this.countdown.subscribe((countdown) => {
-      this.tokenCountdown = countdown;
-    });
   }
 
   ngOnInit(): void {
     const accessTokenJSON = JSON.parse(this.token).accessToken;
     this.getUserProfile(accessTokenJSON.toString());
 
-    // Calculate the remaining time until token expiration
-    if (this.remainingTime <= 0) {
-      this.toastrMsg.show(`Token has expired`, 'Info', {
-        timeOut: 10000,
-        preventDuplicates: true,
-        positionClass: 'toast-top-right'
-      });
-    } else {
-      this.countdown.subscribe((countdown) => {
-        this.toastrMsg.show(`Token will expire in ${countdown}`, 'Info', {
-          timeOut: 10000,
-          preventDuplicates: true,
-          positionClass: 'toast-top-right'
-        });
-      });
-    }
+    // Display counter with the remaining time until token expiration
+    // if (this.remainingTime <= 10) {
+      this.tokenService.getTokenExpirationCountdown$().subscribe((countdown) => {
+        this.showCountdownMsg = true;
+        this.countdownMsg = countdown
+      })
+    // }
   }
   
   @HostListener('document:click', ['$event'])
