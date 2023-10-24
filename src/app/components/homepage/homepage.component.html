@@ -37,9 +37,11 @@
             Logout
         </button>    
         
-        <div>{{countdownMsg}}</div>
+        <!-- <div>{{countdownMsg}}</div> -->
 
     </section>
-
-
 </section>
+
+<div class="fixed bottom-5 right-5">
+    <app-counter-toast [showCountdownMsg]="showCountdownMsg" [countdownMsg]="countdownMsg"></app-counter-toast>
+  </div>

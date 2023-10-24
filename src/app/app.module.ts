@@ -12,6 +12,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ToastComponent } from './shared/UI/toast/toast.component';
 import { AuthGuard } from './services/guards/AuthGuard';
 import { LoginGuard } from './services/guards/LoginGuard';
+import { CounterToastComponent } from './shared/UI/counter-toast/counter-toast.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoginGuard } from './services/guards/LoginGuard';
     HomepageComponent,
     RegisterComponent,
     ToastComponent,
+    CounterToastComponent,
   ],
   imports: [
     BrowserModule,
