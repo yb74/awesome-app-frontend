@@ -8,6 +8,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { RegisterService } from 'src/app/services/register/register.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { TokenService } from 'src/app/services/token/token.service';
+import { environment } from 'src/environments/environment';
+
+import * as AES from 'crypto-js/aes';
 
 @Component({
   selector: 'app-register',
@@ -52,17 +55,25 @@ export class RegisterComponent {
 
     onSubmit() {
       if (this.registerForm.valid) {
+
         console.log(this.registerForm.value);
+        
+        // the use of partial in the service cause problem to encryption code so we use this const
+        const registerF = this.registerForm.value;
     
-        this.registerService.register(this.registerForm.value)
+        this.registerService.register(registerF)
           .pipe(
             catchError((error: HttpErrorResponse) => {
               console.log(error.message);
               return throwError(() => error);
             }),
             switchMap((response: any) => {
-              if (!response.error) {
-                return this.loginService.loginRegister({ username: this.registerForm.value.name, password: this.registerForm.value.password });
+              if (!response.error && registerF.password && registerF.name) {
+                const passwordEncrypted = AES.encrypt(registerF.password, environment.key).toString()
+                return this.loginService.loginRegister({ 
+                  username: registerF.name, 
+                  password: passwordEncrypted,
+                });
               } else {
                 return throwError(() => new Error("User registration failed"));
               }
