@@ -20,8 +20,8 @@ export class RegisterComponent {
   registerForm = this.formBuilder.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    // password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?_\-])[A-Za-z\d@$!%*?_\-]{6,}$/)]],
-    password: ['', [Validators.required,  this.matchValidator('password')]],
+    password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?_\-])[A-Za-z\d@$!%*?_\-]{6,}$/)]],
+    // password: ['', [Validators.required,  this.matchValidator('password')]],
     repeatPassword: ['', [Validators.required, this.matchValidator('password')]]
   });
 
