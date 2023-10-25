@@ -8,9 +8,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { RegisterService } from 'src/app/services/register/register.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { TokenService } from 'src/app/services/token/token.service';
-import { environment } from 'src/environments/environment';
 
-import * as AES from 'crypto-js/aes';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-register',
@@ -61,8 +60,18 @@ export class RegisterComponent {
         // the use of partial in the service cause problem to encryption code so we use this const
         const registerF = this.registerForm.value;
         
-        if (registerF.password) {
-          registerF.password = AES.encrypt(registerF.password, environment.key).toString() 
+        if (registerF.password && registerF.repeatPassword) {
+          //encrypt password
+          const rawPwd = registerF.password;
+          const  pwdArray = CryptoJS.enc.Utf8.parse(rawPwd);
+          const base64 = CryptoJS.enc.Base64.stringify(pwdArray);
+          registerF.password = base64;
+
+           //encrypt password
+           const rawRepeatPwd = registerF.repeatPassword;
+           const  repeatPwdArray = CryptoJS.enc.Utf8.parse(rawRepeatPwd);
+           const base64RepeatPwd = CryptoJS.enc.Base64.stringify(repeatPwdArray);
+           registerF.repeatPassword = base64RepeatPwd;
         }
     
         this.registerService.register(registerF)

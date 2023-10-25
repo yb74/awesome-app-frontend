@@ -6,8 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { TokenService } from 'src/app/services/token/token.service';
-import { environment } from 'src/environments/environment';
-import { AES } from 'crypto-js';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -42,7 +41,11 @@ export class LoginComponent {
       const loginF = this.loginForm.value;
 
       if (loginF.password) {
-        loginF.password = AES.encrypt(loginF.password, environment.key).toString();
+         //encrypt password
+         const rawPwd = loginF.password;
+         const  pwdArray = CryptoJS.enc.Utf8.parse(rawPwd);
+         const base64 = CryptoJS.enc.Base64.stringify(pwdArray);
+         loginF.password = base64;
       }
 
       this.loginService.loginRegister(loginF)
